@@ -38,6 +38,26 @@ a:hover {
 .posttitle {
     text-align: center;
     font-weight: bold;
+    border: #2387D9;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+    color: black
+}
+.postbody{
+    background-color: lightgray;
+    font-size: medium;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+.posttimestamp{
+    background-color: lightgray;
+    font-size: small;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.likecount{
+    font-weight: bolder;
+    align-items: center;
 }
 
 .useritem{
@@ -65,3 +85,12 @@ a:hover {
     background-image: url("..//img//like_hover.png");
     cursor:pointer;
 }
+
+.flash-container{
+    background-color: peachpuff;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 1px;
+    margin-left: auto;
+}
+
