@@ -16,7 +16,8 @@ bp_routes.template_folder = Config.TEMPLATE_FOLDER  #'..\\View\\templates'
 @bp_routes.route("/index", methods=["GET"])
 def index():
     posts = Post.query.order_by(Post.timestamp.desc())
-    return render_template("index.html", title="Smile Portal", posts=posts.all())
+    ptotal = Post.query.count()
+    return render_template("index.html", title="Smile Portal", posts=posts.all(), ptotal=ptotal)
 
 
 @bp_routes.route("/postsmile", methods=["GET", "POST"])
