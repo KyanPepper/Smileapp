@@ -6,7 +6,7 @@
 
 <form action="" method="post">
   {{ form.hidden_tag() }}
-  <div>
+  <div class ="formtitle">
     <!--Displays the form item for the post's `title`.-->
     {{ form.title.label }}<br />
     {{ form.title(class="formtitle") }}<br />
@@ -17,8 +17,9 @@
       {% endfor %}
     </ul>
     {% endif %}
+</div>
     <!-- TODO: (milestone 1) Display the error messages of the `title` field validator (if there are any validation errors).   -->
-
+<div class = "formbody">
     <!-- TODO: (milestone1) Include the form item for the post's `body`. Apply appropriate styling for the `body`form  item.  -->
     {{ form.body.label }}<br />
     {{ form.body(class="formbody") }}<br />
@@ -33,7 +34,7 @@
   </div>
 
   <!-- TODO: (milestone1) Include the form item for `happiness_level` selection. Apply appropriate styling for the `happiness_level` form item.  -->
-  <div>
+  <div class= "formselect">
     {{ form.happiness_level.label }}<br />
     {{ form.happiness_level(class="formhappiness") }}<br />
     <!-- Display the error messages for the `happiness_level` field validator (if any). -->
