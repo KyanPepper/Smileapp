@@ -31,3 +31,15 @@ def create():
         flash('Succsesfuly Submitted Smile')
         return(redirect(url_for('routes.index')))
     return render_template("create.html", title="Post Form", form=cform)
+
+
+@bp_routes.route("/like/<post_id>", methods=["POST","GET"])
+def like(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+    if post is None:
+        flash('Post doesnt exist')
+        return redirect(url_for('routes.index'))  
+    else:
+        post.likes+=1
+        db.session.commit()
+    return redirect(url_for('routes.index'))
