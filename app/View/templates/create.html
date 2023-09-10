@@ -1,31 +1,52 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
+<h1>Post New Smile</h1>
 
-    <h1>Post New Smile</h1>
+{% if form %}
 
-    {% if form %}
-
-        <form action="" method="post">
-            {{ form.hidden_tag() }}
-            <div>
-                <!--Displays the form item for the post's `title`.--> 
-                {{ form.title.label }}<br>
-                {{ form.title(class="formtitle") }}<br>
-                <!-- TODO: (milestone 1) Display the error messages of the `title` field validator (if there are any validation errors).   -->  
-
-                <!-- TODO: (milestone1) Include the form item for the post's `body`. Apply appropriate styling for the `body`form  item.  -->  
-
-                <!-- TODO: (milestone 1) Display the error messages of the `body` field validator (if there are any validation errors).   -->  
-            </div>
-            
-            <!-- TODO: (milestone1) Include the form item for `happiness_level` selection. Apply appropriate styling for the `happiness_level` form item.  -->  
-
-            <!-- TODO: (milestone2) Include the form item for `tag` selection.   -->  
-
-            {{ form.submit(class="button") }}
-        </form>
+<form action="" method="post">
+  {{ form.hidden_tag() }}
+  <div>
+    <!--Displays the form item for the post's `title`.-->
+    {{ form.title.label }}<br />
+    {{ form.title(class="formtitle") }}<br />
+    {% if form.title.errors %}
+    <ul class="errors">
+      {% for error in form.title.errors %}
+      <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
     {% endif %}
+    <!-- TODO: (milestone 1) Display the error messages of the `title` field validator (if there are any validation errors).   -->
 
+    <!-- TODO: (milestone1) Include the form item for the post's `body`. Apply appropriate styling for the `body`form  item.  -->
+    {{ form.body.label }}<br />
+    {{ form.body(class="formbody") }}<br />
+    {% if form.body.errors %}
+    <ul class="errors">
+      {% for error in form.body.errors %}
+      <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <!-- TODO: (milestone 1) Display the error messages of the `body` field validator (if there are any validation errors).   -->
+  </div>
 
-  {% endblock %}
+  <!-- TODO: (milestone1) Include the form item for `happiness_level` selection. Apply appropriate styling for the `happiness_level` form item.  -->
+  <div>
+    {{ form.happiness_level.label }}<br />
+    {{ form.happiness_level(class="formhappiness") }}<br />
+    <!-- Display the error messages for the `happiness_level` field validator (if any). -->
+    {% if form.happiness_level.errors %}
+    <ul class="errors">
+      {% for error in form.happiness_level.errors %}
+      <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <!-- TODO: (milestone2) Include the form item for `tag` selection.   -->
+
+  {{ form.submit(class="button") }}
+</form>
+{% endif %} {% endblock %}

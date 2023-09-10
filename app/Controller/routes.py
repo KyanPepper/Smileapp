@@ -8,12 +8,26 @@ from app import db
 from app.Model.models import Post
 from app.Controller.forms import PostForm
 
-bp_routes = Blueprint('routes', __name__)
-bp_routes.template_folder = Config.TEMPLATE_FOLDER #'..\\View\\templates'
+bp_routes = Blueprint("routes", __name__)
+bp_routes.template_folder = Config.TEMPLATE_FOLDER  #'..\\View\\templates'
 
 
-@bp_routes.route('/', methods=['GET'])
-@bp_routes.route('/index', methods=['GET'])
+@bp_routes.route("/", methods=["GET"])
+@bp_routes.route("/index", methods=["GET"])
 def index():
     posts = Post.query.order_by(Post.timestamp.desc())
-    return render_template('index.html', title="Smile Portal", posts=posts.all())
+    return render_template("index.html", title="Smile Portal", posts=posts.all())
+
+
+@bp_routes.route("/postsmile", methods=["GET", "POST"])
+def create():
+    cform = PostForm()
+    if cform.validate_on_submit():
+        newPost = Post(
+            title=cform.title.data, body=cform.body.data, happiness_level=cform.happiness_level.data
+        )
+        db.session.add(newPost)
+        db.session.commit()
+        flash('Succsesfuly Submitted Smile')
+        return(redirect(url_for('routes.index')))
+    return render_template("create.html", title="Post Form", form=cform)
