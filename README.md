@@ -34,3 +34,5 @@ Includes all tests (unittest, pytest, selenium)
     ```
         python tests/test_selenium.py
     ```
+Kyan Kotschevar-Smead
+Computer Science
