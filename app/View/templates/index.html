@@ -11,8 +11,12 @@
 
 
     <!--     TODO: (milestone 2) Format posts -->
+ <div class ="postlist">
     {% for post in posts %}
-       {% include '_post.html' %} 
+     <div class ="post-box">
+        {% include '_post.html' %} 
+     </div>
     {% endfor %}
-    
+ </div>
+
 {% endblock %}
