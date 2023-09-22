@@ -6,19 +6,30 @@ from config import Config
 
 from app import db
 from app.Model.models import Post,Tag,postTags
-from app.Controller.forms import PostForm
+from app.Controller.forms import PostForm,SortForm
 
 bp_routes = Blueprint("routes", __name__)
 bp_routes.template_folder = Config.TEMPLATE_FOLDER  #'..\\View\\templates'
 
-
-@bp_routes.route("/", methods=["GET"])
-@bp_routes.route("/index", methods=["GET"])
+@bp_routes.route("/", methods=["GET", "POST"])
+@bp_routes.route("/index", methods=["GET", "POST"])
 def index():
-    posts = Post.query.order_by(Post.timestamp.desc())
+    sform = SortForm()
+    posts = None 
+    
+    if sform.validate_on_submit():
+        if sform.sort.data == 1:
+            posts = Post.query.order_by(Post.timestamp.desc()).all()
+        elif sform.sort.data == 2:
+            posts = Post.query.order_by(Post.title.desc()).all()
+        elif sform.sort.data == 3:
+            posts = Post.query.order_by(Post.likes.desc()).all()
+        else:
+            posts = Post.query.order_by(Post.happiness_level.desc()).all()
+    else:
+        posts = Post.query.order_by(Post.timestamp.desc()).all()
     ptotal = Post.query.count()
-    return render_template("index.html", title="Smile Portal", posts=posts.all(), ptotal=ptotal)
-
+    return render_template("index.html", title="Smile Portal", posts=posts, ptotal=ptotal, form=sform)
 
 @bp_routes.route("/postsmile", methods=["GET", "POST"])
 def create():

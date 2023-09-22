@@ -15,3 +15,8 @@ class PostForm(FlaskForm):
     body  = TextAreaField('Body',validators=[DataRequired(),Length(min=1, max=1500)])
     submit = SubmitField('Post')
     tag =  QuerySelectMultipleField( 'Tag', query_factory= tag_query, get_label=lambda tag: tag.name, widget=ListWidget(prefix_label=False),  option_widget=CheckboxInput())
+
+
+class SortForm(FlaskForm):
+   sort = SelectField('Sort',choices = [(1, 'Date'), (2, 'Title'), (3,'# of likes'),(4,'Happiness level')])
+   submit =SubmitField('Refresh')
