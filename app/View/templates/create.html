@@ -47,7 +47,8 @@
     {% endif %}
   </div>
   <!-- TODO: (milestone2) Include the form item for `tag` selection.   -->
-
+  {{ form.tag.label }}<br />
+  {{ form.tag(class="formhappiness") }}<br />
   {{ form.submit(class="button") }}
 </form>
 {% endif %} {% endblock %}

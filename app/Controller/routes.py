@@ -27,6 +27,10 @@ def create():
         newPost = Post(
             title=cform.title.data, body=cform.body.data, happiness_level=cform.happiness_level.data
         )
+        t1 = cform.tag.data
+        for tag in t1:
+            newPost.tags.append(tag)
+
         db.session.add(newPost)
         db.session.commit()
         flash('Succsesfuly Submitted Smile')
