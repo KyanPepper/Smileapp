@@ -152,3 +152,17 @@ a:hover {
         width: 99%;
     }
   }
+
+.tagitem{
+    background-color: #3498db; 
+    color: #fff; 
+    padding: 5px 10px;
+    border-radius: 4px; 
+    margin-right: 5px; 
+}
+.tagitemspan {
+    border: 1px solid whitesmoke;
+    margin-right: 3px;
+    padding: 2px 4px; 
+    border-radius: 4px; 
+}
