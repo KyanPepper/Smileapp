@@ -166,3 +166,9 @@ a:hover {
     padding: 2px 4px; 
     border-radius: 4px; 
 }
+.forminput {
+    padding : 2px;
+	font-family: 'Segoe UI', Tahoma,  Verdana, sans-serif;
+	font: 18px;
+	width: 400px;
+}
