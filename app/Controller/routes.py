@@ -29,6 +29,7 @@ def index():
     else:
         posts = Post.query.order_by(Post.timestamp.desc()).all()
     ptotal = Post.query.count()
+  
     return render_template("index.html", title="Smile Portal", posts=posts, ptotal=ptotal, form=sform)
 
 @bp_routes.route("/postsmile", methods=["GET", "POST"])
