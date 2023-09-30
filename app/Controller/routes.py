@@ -68,3 +68,15 @@ def like(post_id):
         post.likes+=1
         db.session.commit()
     return redirect(url_for('routes.index'))
+
+@bp_routes.route("/deletepost/<post_id>", methods = ['DELETE', 'POST','GET'])
+@login_required
+def deletepost(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+    for tag in post.tags:
+        post.tags.remove(tag)
+    db.session.commit()
+    db.session.delete(post)
+    db.session.commit()
+    flash('Deleted Post')
+    return redirect(url_for('routes.index'))
