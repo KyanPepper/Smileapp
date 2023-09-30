@@ -16,20 +16,26 @@ bp_routes.template_folder = Config.TEMPLATE_FOLDER  #'..\\View\\templates'
 def index():
     sform = SortForm()
     posts = None 
-    
+    ptotal = None
     if sform.validate_on_submit():
-        if sform.sort.data == 1:
+        if sform.userSort.data == True:
+            posts = current_user.get_user_posts()
+            ptotal = posts.count()
+        elif sform.sort.data == 1:
             posts = Post.query.order_by(Post.timestamp.desc()).all()
+            ptotal = Post.query.count()
         elif sform.sort.data == 2:
             posts = Post.query.order_by(Post.title.desc()).all()
+            ptotal = Post.query.count()
         elif sform.sort.data == 3:
             posts = Post.query.order_by(Post.likes.desc()).all()
+            ptotal = Post.query.count()
         else:
             posts = Post.query.order_by(Post.happiness_level.desc()).all()
+            ptotal = Post.query.count()
     else:
         posts = Post.query.order_by(Post.timestamp.desc()).all()
-    ptotal = Post.query.count()
-  
+        ptotal = Post.query.count()
     return render_template("index.html", title="Smile Portal", posts=posts, ptotal=ptotal, form=sform,is_authenticated = current_user.is_authenticated,current_user = current_user)
 
 @bp_routes.route("/postsmile", methods=["GET", "POST"])
@@ -38,7 +44,7 @@ def create():
     cform = PostForm()
     if cform.validate_on_submit():
         newPost = Post(
-            title=cform.title.data, body=cform.body.data, happiness_level=cform.happiness_level.data
+            title=cform.title.data, body=cform.body.data, happiness_level=cform.happiness_level.data,user_id = current_user.id
         )
         t1 = cform.tag.data
         for tag in t1:
