@@ -3,16 +3,16 @@ import sys
 from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, request
 from config import Config
-
+from flask_login import current_user,login_required
 from app import db
 from app.Model.models import Post,Tag,postTags
 from app.Controller.forms import PostForm,SortForm
-
 bp_routes = Blueprint("routes", __name__)
 bp_routes.template_folder = Config.TEMPLATE_FOLDER  #'..\\View\\templates'
 
 @bp_routes.route("/", methods=["GET", "POST"])
 @bp_routes.route("/index", methods=["GET", "POST"])
+@login_required
 def index():
     sform = SortForm()
     posts = None 
@@ -30,9 +30,10 @@ def index():
         posts = Post.query.order_by(Post.timestamp.desc()).all()
     ptotal = Post.query.count()
   
-    return render_template("index.html", title="Smile Portal", posts=posts, ptotal=ptotal, form=sform)
+    return render_template("index.html", title="Smile Portal", posts=posts, ptotal=ptotal, form=sform,is_authenticated = current_user.is_authenticated,current_user = current_user)
 
 @bp_routes.route("/postsmile", methods=["GET", "POST"])
+@login_required
 def create():
     cform = PostForm()
     if cform.validate_on_submit():
@@ -51,6 +52,7 @@ def create():
 
 
 @bp_routes.route("/like/<post_id>", methods=["POST","GET"])
+@login_required
 def like(post_id):
     post = Post.query.filter_by(id=post_id).first()
     if post is None:
