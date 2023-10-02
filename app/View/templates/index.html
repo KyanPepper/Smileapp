@@ -13,9 +13,13 @@
                 <div class="formselect">
                     {{ form.label }}
                     {{ form.sort }}
+
+                    {{form.userSort}}
+                    {{form.userSort.label}}
+                    {{ form.submit }}
                 </div>
                 <!-- Render the "Refresh" submit button -->
-                {{ form.submit }}
+               
             </form>
 
     <!--     TODO: (milestone 2) Format posts -->
