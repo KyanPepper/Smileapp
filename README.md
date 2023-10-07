@@ -1,5 +1,7 @@
 # SmileApp: Share Smiles
 
+Demonstration: https://youtu.be/kdMR-yyT5UU
+
 **SmileApp** 
 is a social media app that allows users to post create accounts, and post about what makes them happy. 
 
@@ -9,7 +11,7 @@ Be able to like, create, filter, and view a wide diversity of smile posts.
 
 ## Tech Stack
 ### Frontend
-Built-in basic HTML and CSS, utilizes Jinja2 for templating python 
+Built-in basic HTML and CSS utilizes Jinja2 for templating python 
 
 ### Backend
 
